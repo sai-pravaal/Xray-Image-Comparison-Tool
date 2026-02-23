@@ -73,4 +73,6 @@ python frontend.py
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
-*Developed by Prakyath Tejsundar*
+*Developed by Sai Pravaal (24BBS0115)
+Prakyath Tejsundar (24BBS0079)
+Rethish J Kanth (24BBS107) *
