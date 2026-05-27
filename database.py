@@ -4,7 +4,8 @@ import os, re, sqlite3
 from pathlib import Path
 from datetime import datetime
 
-DB_NAME = "xray.db"
+BASE_DIR = Path(__file__).resolve().parent
+DB_NAME = BASE_DIR / "xray.db"
 
 BODY_PARTS_CANON = {
     'chest':'chest','femur':'femur','foot':'foot','forearm':'forearm','hand':'hand',
@@ -84,6 +85,9 @@ def parse_age_band_from_folder(name: str):
 
 def ingest_tree(root='data'):
     root_p=Path(root)
+    if not root_p.is_absolute():
+        root_p = BASE_DIR / root_p
+    root_p = root_p.resolve()
     if not root_p.exists():
         return {'inserted':0,'skipped':0}
     ins=0; sk=0
@@ -123,7 +127,7 @@ def ingest_tree(root='data'):
                                 try:
                                     c.execute(
                                         "INSERT INTO image_store(path,body_part,side,gender,age,added_at) VALUES (?,?,?,?,?,?)",
-                                        (str(f), body, side, gender, age_val, datetime.utcnow().isoformat())
+                                        (str(f.resolve()), body, side, gender, age_val, datetime.utcnow().isoformat())
                                     ); ins+=1
                                 except sqlite3.IntegrityError:
                                     sk+=1

@@ -12,7 +12,8 @@ import database as db
 import backend as be
 
 APP_TITLE = "X-ray Compare – Contours first, click to Heatmap"
-DATA_DIR = "data"
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
 
 BODY_DISPLAY = ['chest','femur','foot','forearm','hand','humerus','shoulder','tibia and fibula','wrist']
 BODY_KEYS = {'chest':'chest','femur':'femur','foot':'foot','forearm':'forearm','hand':'hand','humerus':'humerus','shoulder':'shoulder','tibia and fibula':'tibia_fibula','wrist':'wrist'}
